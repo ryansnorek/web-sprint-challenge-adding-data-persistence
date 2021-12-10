@@ -1,12 +1,5 @@
 const db = require('../../data/dbConfig');
-
-const convert = (num) => num === 1 ? true : false;
-const boolify = (task, arg) => {
-    return ({
-        ...task,
-        task_completed: convert(arg)
-    })
-};
+const { boolifyTask, convert } = require('../helper');
 
 const getTasks = async () => {
     // SELECT * FROM tasks as t
@@ -35,7 +28,7 @@ const addTask = async (newTask) => {
                 .where('task_id', task_id)
                 .first()
         });
-    return boolify(added, added.task_completed)
+    return boolifyTask(added);
 };
 
 module.exports = {
