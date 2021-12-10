@@ -1,5 +1,13 @@
 const db = require('../../data/dbConfig');
 
+const convert = (num) => num === 1 ? true : false;
+const boolify = (task, arg) => {
+    return ({
+        ...task,
+        task_completed: convert(arg)
+    })
+};
+
 const getTasks = async () => {
     // SELECT * FROM tasks as t
     // LEFT JOIN projects as p
@@ -13,7 +21,7 @@ const getTasks = async () => {
             task_id: tp.task_id,
             task_description: tp.task_description,
             task_notes: tp.task_notes,
-            task_completed: tp.task_completed,
+            task_completed: convert(tp.task_completed),
             project_name: tp.project_name,
             project_description: tp.project_description
         })
