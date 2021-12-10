@@ -12,7 +12,11 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    console.log('POST connected....')
+    Tasks.addTask(req.body)
+    .then(newTask => {
+        res.json(newTask)
+    })
+    .catch(next)
 });
 
 module.exports = router;
