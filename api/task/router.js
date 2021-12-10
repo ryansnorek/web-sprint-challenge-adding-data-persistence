@@ -1,12 +1,15 @@
 const express = require('express');
+const Tasks = require('./model');
 
-// -------- TASKS -------- //
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    console.log('GET connected....')
+router.get('/', async (req, res, next) => {
+    try {
+        const tasks = await Tasks.getTasks();
+        res.json(tasks);
+        
+    } catch(e) { next(e) }
 })
-
 router.post('/', (req, res, next) => {
     console.log('POST connected....')
 })

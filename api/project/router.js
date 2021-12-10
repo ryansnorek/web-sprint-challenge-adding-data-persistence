@@ -1,10 +1,14 @@
 const express = require('express');
+const Projects = require('./model');
 
-// -------- PROJECTS -------- //
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    console.log('GET connected....')
+router.get('/', async (req, res, next) => {
+    try {
+        const projects = await Projects.getProjects();
+        res.json(projects);
+        
+    } catch(e) { next(e) }
 })
 
 router.post('/', (req, res, next) => {

@@ -1,10 +1,14 @@
 const express = require('express');
+const Resources = require('./model');
 
-// -------- RESOURCES -------- //
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    console.log('GET connected....')
+router.get('/', async (req, res, next) => {
+    try {
+        const resources = await Resources.getResources();
+        res.json(resources);
+        
+    } catch(e) { next(e) }
 })
 
 router.post('/', (req, res, next) => {
