@@ -27,14 +27,15 @@ const getTasks = async () => {
         })
     }) 
 };
-const addTask = (newTask) => {
-    return db('tasks')
+const addTask = async (newTask) => {
+    const added = await db('tasks')
         .insert(newTask)
         .then(([task_id]) => {
             return db('tasks')
                 .where('task_id', task_id)
                 .first()
         });
+    return boolify(added, added.task_completed)
 };
 
 module.exports = {

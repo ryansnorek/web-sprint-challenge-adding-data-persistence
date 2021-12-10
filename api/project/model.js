@@ -1,6 +1,5 @@
 const db = require('../../data/dbConfig');
 
-
 const convert = (num) => num === 1 ? true : false;
 const boolify = (project, arg) => {
     return ({
@@ -14,15 +13,16 @@ const getProjects = async () => {
     return projects.map(p => boolify(p, p.project_completed));
 };
 
-const addProject = (newProject) => {
-    return db('projects')
+const addProject = async (newProject) => {
+    const added = await db('projects')
         .insert(newProject)
         .then(([project_id]) => {
-            const added = db('projects')
+            return db('projects')
                 .where('project_id', project_id)
                 .first()
-            return boolify(added, added.project_completed)
+            
         });
+        return boolify(added, added.project_completed)
 };
 
 module.exports = {
