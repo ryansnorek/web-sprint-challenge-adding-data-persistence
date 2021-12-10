@@ -3,16 +3,20 @@ const Projects = require('./model');
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
-    try {
-        const projects = await Projects.getProjects();
-        res.json(projects);
-
-    } catch(e) { next(e) }
+router.get('/', (req, res, next) => {
+    Projects.getProjects()
+        .then(project => {
+            res.json(project);
+        })
+        .catch(next)
 });
 
 router.post('/', (req, res, next) => {
-    console.log('POST connected....')
+    Projects.addProject(req.body)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(next)
 });
 
 module.exports = router;

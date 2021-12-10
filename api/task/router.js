@@ -4,11 +4,11 @@ const Tasks = require('./model');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-    try {
-        const tasks = await Tasks.getTasks();
-        res.json(tasks);
-        
-    } catch(e) { next(e) }
+    Tasks.getTasks()
+        .then(task => {
+            res.json(task)
+        })
+        .catch(next)
 });
 
 router.post('/', (req, res, next) => {
