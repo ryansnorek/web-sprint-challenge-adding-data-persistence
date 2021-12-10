@@ -9,9 +9,10 @@ router.get('/', async (req, res, next) => {
         res.json(tasks);
         
     } catch(e) { next(e) }
-})
+});
+
 router.post('/', (req, res, next) => {
     console.log('POST connected....')
-})
+});
 
 module.exports = router;
