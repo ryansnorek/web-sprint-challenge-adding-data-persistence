@@ -5,7 +5,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --silent",
     "start": "node index.js",
-    "server": "node server.js",
+    "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "create": "knex migrate:make create-projects-table",
@@ -20,6 +20,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.4.1",
     "jest": "27.4.3",
+    "nodemon": "^2.0.15",
     "supertest": "6.1.6"
   },
   "dependencies": {
